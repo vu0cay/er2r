@@ -1,0 +1,39 @@
+1) Cau hinh may ao:
+- Chon bo nho 1024MB
+- Luu dia cung o o dia D:\CentOS.vdi
+- Storage: 
+	+ Chon CD: C:\Backup\iso\CentOS6.5...
+	+ Chon LIVECD
+- Network: Bridged Adapter
+
+2) Khoi dong tu LIVECD (Neu muon lay con tro ve Windows, thi nhan phim Control ben PHAI)
+- Click vao Install To Hard Drive
+- Mat khau root: ct179@cit
+- Chia dia cung: Custom Layout: 02 phan khu
+	+ Phan khu 1: 500MB - SWAP
+	+ Phan khu 2: Phan con lai: / (ext4)
+- Tien hanh cai dat HDH vao dia cung
+
+3) Cai dat xong:
+
+- Go LIVECD ra, khoi dong tu dia cung.
+- Tao tai khoan nguoi dung binh thuong: user/user
+- Dang nhap voi tai khoan user
+- Cau hinh mang:
+	+ IP: 172.30.116.XXX
+	+ Netmask: 255.255.255.0
+	+ Router: 172.30.116.1
+	+ DNS: 172.18.27.2
+	+ Proxy: cache-st.ctu.edu.vn:3128
+-Cap nhat kho chua du lieu:
+https://www.getpagespeed.com/server-setup/how-to-fix-yum-after-centos-6-went-eol
+a)Mo cua so lenh:
+	su <ct179@cit> 
+	curl https://www.getpagespeed.com/files/centos6-eol.repo --output /etc/yum.repos.d/CentOS-Base.repo 
+c)yum clean all
+
+
+4) Cai dat SSH server va cau hinh Buc Tuong Lua cho phep truy cap tu xa:
+	yum install openssh-server
+	yum install system-config-firewall
+	service sshd restart
