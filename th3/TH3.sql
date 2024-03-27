@@ -44,7 +44,7 @@ INSERT INTO TACPHAM VALUES (10,'Po?e','Arthur Rimbaud');
 INSERT INTO TACPHAM VALUES (11,'La Mare au Diable','George Sand');
 INSERT INTO TACPHAM VALUES (12,'Carmen','Prosper Merimee');
 INSERT INTO TACPHAM VALUES (13,'Lettres de mon moulin','Alphonse Daudet');
-INSERT INTO TACPHAM VALUES (14,'Les contes du chat perché', 'Marcel Ayme');
+INSERT INTO TACPHAM VALUES (14,'Les contes du chat perchÃ©', 'Marcel Ayme');
 INSERT INTO TACPHAM VALUES (15,'La Peste','Albert Camus');
 INSERT INTO TACPHAM VALUES (16,'Le petit prince','Antoine de St Exupery');
 
@@ -290,3 +290,37 @@ select *
 from c25
 where sotacpham = (select min(sotacpham) m from c25);
 --26
+create table c26 as 
+    select ho, ten, count(distinct NS) sosachmuon
+    from DOCGIA D join MUON M on D.ND = M.ND
+    group by ho, ten;
+select *
+from c26
+where sosachmuon = (select max(sosachmuon) m from c26);
+--c27
+select *
+from c26
+where sosachmuon = (select min(sosachmuon) m from c26);
+--c28
+select tua
+from tacpham T join sach S on T.NT = S.NT
+    left join muon M on S.NS = M.NS
+where ngaymuon is NULL
+order by S.NT;
+--c29
+select tua
+from tacpham 
+where NT not in (select T.NT
+                from tacpham T join sach S on T.NT = S.NT
+                left join muon M on S.NS = M.NS
+                where ngaymuon is NULL);
+--c30
+
+select ho,ten
+from docgia D left join muon M on D.ND = M.ND
+where NS is NULL;
+--c31
+select nxb
+from sach S left join muon M on S.NS = M.NS
+where M.NS is NULL;
+
